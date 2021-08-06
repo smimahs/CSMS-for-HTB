@@ -1,11 +1,13 @@
 from flask import Flask, request
 from flask_restful import reqparse, abort, Api, Resource
 from app import Charging_process_rate 
-import json
-
 
 app = Flask(__name__)
 api = Api(app)
+
+parser = reqparse.RequestParser()
+parser.add_argument('rate')
+parser.add_argument('cdr')
 
 
 class Charging_Process(Resource):
@@ -13,8 +15,8 @@ class Charging_Process(Resource):
         return 'get'
 
     def post(self):
-        return str(request.form.get)
-        result = Charging_process_rate(request.form)
+        data = parser.parse_args()
+        result = Charging_process_rate(data)
         return result
 
 api.add_resource(Charging_Process, '/price')
