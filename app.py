@@ -20,12 +20,14 @@ def Calculate_duration(timeStampStart, timeStampStop):
     except Exception as e:
         return str(e)
 
+# Calculating the total energy price from start meter to stop based on energeFee
 def Counting_energy_price(energyFee,overallEnergy):
     try:
         return float("{:.3f}".format((overallEnergy/1000) * energyFee))
     except Exception as e:
         return str(e)
 
+# Calculating the total time price from start meter to stop based on timeFee
 def Counting_time_price(timeFee,durationTime):
     try:
         hoursTimeStamp = durationTime / 3600
@@ -33,6 +35,7 @@ def Counting_time_price(timeFee,durationTime):
     except Exception as e:
         return str(e)
 
+# Calculating the total transaction price from start meter to stop based on transactionFee
 def Counting_transaction_price(transactionFee,transactions):
     try:
         return float("{:.3f}".format(transactions * transactionFee))
@@ -41,27 +44,20 @@ def Counting_transaction_price(transactionFee,transactions):
 
 def Calculate_overall_price(energyOverallPrice,timeOverallPrice,transactionFee):
     try:
-        return "{:.2f}".format(float(energyOverallPrice) + float(timeOverallPrice) + float(transactionFee))
+        return float("{:.2f}".format(float(energyOverallPrice) + float(timeOverallPrice) + float(transactionFee)))
     except Exception as e:
         return str(e)
 
 def Charging_process_rate(data):
+    # Getting meter values retrieved from the electricity meter along with a timestamp are sent by the charging station to the CSM
     try:
         meter = data['cdr']
+        # convert string to json
         meter = meter.replace("\'", "\"")
         meter = json.loads(meter)
     except Exception as e:
-        return str(e)
-
-    try:
-        rate = data['rate']
-        rate = rate.replace("\'", "\"")
-        rate = json.loads(rate)
-    except Exception as e:
-        return str(e)
-    #rate = json.loads(rate)
+        return str("The input value in incorrect")
     
-    # Getting meter values retrieved from the electricity meter along with a timestamp are sent by the charging station to the CSM
     # Meters for StartTransaction
     # Meter value of the electricity meter when the charging process was started
     meterStart = meter['meterStart']
@@ -75,6 +71,14 @@ def Charging_process_rate(data):
     timeStampStop = meter['timestampStop']
 
     # Getting Rating values
+    try:
+        rate = data['rate']
+        # convert string to json
+        rate = rate.replace("\'", "\"")
+        rate = json.loads(rate)
+    except Exception as e:
+        return str("The input value in incorrect")
+
     # Rate the charging process based on the energy consumed
     energyFee = rate['energy']
     # Rate the charging process based on its duration
@@ -88,14 +92,19 @@ def Charging_process_rate(data):
     # Counting the duration time from start meter to stop
     durationTime = Calculate_duration(timeStampStart, timeStampStop)
     
+    # Calculate energy overall price based on energy fee and overall energy
     energyOverallPrice = Counting_energy_price(energyFee,overallEnergy)
 
+    # Calculate time overall price based on time fee and duration time
     timeOverallPrice = Counting_time_price(timeFee,durationTime)
 
+    # Calculate transaction overall price based on transaction fee and transaction counts
     transactionOverallPrice = Counting_transaction_price(transactionFee,len(meter))
 
+    # Sum of energy, time, and transaction price
     overallPrice = Calculate_overall_price(energyOverallPrice,timeOverallPrice,transactionFee)
 
+    # Send correct result form to server
     result = {'overall':overallPrice,
     'components':{'energy':energyOverallPrice,'time':timeOverallPrice,'transaction':transactionFee}}
 

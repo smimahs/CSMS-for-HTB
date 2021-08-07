@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("../../fonts/webfonts/Montserrat.css");
+
+body, html {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+	height:100%;
+	padding:0px;
+}
+
+.offcanvas-header{ display:none; }
+.screen-overlay {
+  height: 100%;
+  z-index: 30;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity:0;
+  visibility:hidden;
+  background-color: rgba(34, 34, 34, 0.6);
+  transition:opacity .2s linear, visibility .1s, width 1s ease-in;
+}
+.screen-overlay.show {
+  transition:opacity .5s ease, width 0s;
+  opacity:1;
+  width:100%;
+  visibility:visible;
+}
+
+.quebtn {
+    display: block;
+    background-color: #9c1d5e;
+	color:white;
+    width: 200px;
+	margin: 20px 0;
+    border-style: none;
+    border-radius: 15px;
+    transition: .3s ease;
+    padding: .8rem 0;
+}
+
+.quebtn:hover {
+    background-color: #5B6461;
+}
+
+.funnelque {
+	box-shadow: 0px 20px 25px 5px rgba(0, 0, 0, .2);
+	border-radius:5px;
+	padding:0px 15px;
+	
+}
