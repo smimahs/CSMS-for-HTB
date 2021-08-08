@@ -23,6 +23,10 @@ env\Scripts\activate
 * running the app run this in terminal
 python .\api.py 
 
+* running the app with docker image use this
+docker build --tag csms-docker-file .
+docker run --name csms-docker-file -p 5000:5000 csms-docker-file
+
 ### Project section
 * api.py -> rate post api
 * app.py -> all functions for calculating the result based on input
