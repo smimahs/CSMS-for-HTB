@@ -10,6 +10,7 @@ headers = {
     'cache-control': "no-cache"
     }
 
+# load input data from a file
 def load_input(fileName):
     f = open("rate.json")
     payload = f.read()

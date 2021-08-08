@@ -10,12 +10,13 @@ parser = reqparse.RequestParser()
 parser.add_argument('rate')
 parser.add_argument('cdr')
 
+# load ui for testing
 @app.route('/rate', methods=['GET'])
 def home():
     return render_template('CSMS.html')
-    
-class Charging_Process(Resource):
 
+# Rate post API for charging process ratting    
+class Charging_Process(Resource):
     def post(self):
         data = parser.parse_args()
         result = Charging_process_rate(data)

@@ -23,6 +23,7 @@ def Calculate_duration(timeStampStart, timeStampStop):
 # Calculating the total energy price from start meter to stop based on energeFee
 def Counting_energy_price(energyFee,overallEnergy):
     try:
+        # convert Wh to kWh
         return float("{:.3f}".format((overallEnergy/1000) * energyFee))
     except Exception as e:
         return str(e)
@@ -30,6 +31,7 @@ def Counting_energy_price(energyFee,overallEnergy):
 # Calculating the total time price from start meter to stop based on timeFee
 def Counting_time_price(timeFee,durationTime):
     try:
+        # convert second to hour
         hoursTimeStamp = durationTime / 3600
         return float("{:.3f}".format(hoursTimeStamp * timeFee))
     except Exception as e:
@@ -42,6 +44,7 @@ def Counting_transaction_price(transactionFee,transactions):
     except Exception as e:
         return str(e)
 
+# Calculating the overall price from start meter to stop based on Fees
 def Calculate_overall_price(energyOverallPrice,timeOverallPrice,transactionFee):
     try:
         return float("{:.2f}".format(float(energyOverallPrice) + float(timeOverallPrice) + float(transactionFee)))
@@ -60,13 +63,13 @@ def Charging_process_rate(data):
     
     # Meters for StartTransaction
     # Meter value of the electricity meter when the charging process was started
-    meterStart = meter['meterStart']
+    meterStart = float(meter['meterStart'])
     # Timestamp (according to ISO 8601) when the charging process was started
     timeStampStart = meter['timestampStart']
 
     # Meters for StopTransaction
     # Meter value of the electricity meter when the charging process was stopped
-    meterStop = meter['meterStop']
+    meterStop = float(meter['meterStop'])
     # Timestamp (according to ISO 8601) when the charging process was stopped
     timeStampStop = meter['timestampStop']
 
@@ -80,11 +83,11 @@ def Charging_process_rate(data):
         return str("The input value in incorrect")
 
     # Rate the charging process based on the energy consumed
-    energyFee = rate['energy']
+    energyFee = float(rate['energy'])
     # Rate the charging process based on its duration
-    timeFee = rate['time']
+    timeFee = float(rate['time'])
     # Fees per charging process
-    transactionFee = rate['transaction']
+    transactionFee = float(rate['transaction'])
 
     # Counting the overall delivered energy
     overallEnergy = Counting_overall_energy(meterStart, meterStop)

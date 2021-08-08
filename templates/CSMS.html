@@ -11,21 +11,9 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7T5W126KS"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-V7T5W126KS');
-    </script>
+
+
+
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
     <title>HTB</title>
 </head>
@@ -46,7 +34,7 @@
                         Simple charging station management system
                     </p>
                     <br>
-                    <form novalidate id="myForm">
+                    <div>
                         <p>Charging Process Input data</p>
                         <div class="form-row ">
                             <div class="form-group mx-auto col-9 ">
@@ -54,6 +42,15 @@
                                 <input name="meterStart" class="form-control " type="number" pattern="[0-9]" required
                                     id="meterStart" style="border-radius: 3px;font-size:15px;height:40px"
                                     placeholder="meterStart">
+                            </div>
+                        </div>
+
+                        <div class="form-row ">
+                            <div class="form-group mx-auto col-9 ">
+                                <lable for="validationCustom" class="sr-only">timestampStart</lable>
+                                <input name="timestampStart" class="form-control " type="text" id="timestampStart"
+                                    required style="border-radius: 3px;font-size:15px;height:40px"
+                                    placeholder="timestampStart">
                             </div>
                         </div>
                         <div class="form-row ">
@@ -66,50 +63,47 @@
                         </div>
                         <div class="form-row ">
                             <div class="form-group mx-auto col-9 ">
-                                <lable for="validationCustom" class="sr-only">Meter Start</lable>
-                                <input name="name" class="form-control " type="number" pattern="[0-9]" required
-                                    id="meterStart" style="border-radius: 3px;font-size:15px;height:40px"
-                                    placeholder="meterStart">
-                            </div>
-                        </div>
-                        <div class="form-row ">
-                            <div class="form-group mx-auto col-9 ">
-                                <lable for="validationCustom" class="sr-only">Meter Start</lable>
-                                <input name="name" class="form-control " type="number" pattern="[0-9]" required
-                                    id="meterStart" style="border-radius: 3px;font-size:15px;height:40px"
-                                    placeholder="meterStart">
+                                <lable for="validationCustom" class="sr-only">timestampStop</lable>
+                                <input name="timestampStop" class="form-control " type="text" pattern="[0-9]"
+                                    id="timestampStop" required style="border-radius: 3px;font-size:15px;height:40px"
+                                    placeholder="timestampStop">
                             </div>
                         </div>
                         <p>Charging Process Rating Fee</p>
                         <div class="form-row ">
                             <div class="form-group mx-auto col-9 ">
                                 <lable for="validationCustom" class="sr-only">Energy</lable>
-                                <input name="Energy" class="form-control " type="number" pattern="[0-9]" required
-                                    id="Energy" style="border-radius: 3px;font-size:15px;height:40px"
-                                    placeholder="Energy">
+                                <input name="energy" class="form-control " type="number" pattern="[0-9.]" id="energy"
+                                    required style="border-radius: 3px;font-size:15px;height:40px" placeholder="Energy">
                             </div>
                         </div>
 
                         <div class="form-row ">
                             <div class="form-group mx-auto col-9 ">
                                 <lable for="validationCustom" class="sr-only">Time</lable>
-                                <input name="Time" class="form-control " type="number" pattern="[0-9]" required
-                                    id="Time" style="border-radius: 3px;font-size:15px;height:40px" placeholder="Time">
+                                <input name="time" class="form-control " type="number" pattern="[0-9.]" id="time"
+                                    required style="border-radius: 3px;font-size:15px;height:40px" placeholder="Time">
                             </div>
                         </div>
                         <div class="form-row ">
                             <div class="form-group mx-auto col-9 ">
-                                <lable for="validationCustom" class="sr-only">transaction</lable>
-                                <input name="transaction" class="form-control " type="number" pattern="[0-9]" required
+                                <lable for="validationCustom" class="sr-only">Transaction</lable>
+                                <input name="transaction" class="form-control " type="number" pattern="[0-9.]" required
                                     id="transaction" style="border-radius: 3px;font-size:15px;height:40px"
-                                    placeholder="transaction">
+                                    placeholder="Transaction">
                             </div>
                         </div>
                         <button class="quebtn mx-auto" id="btn" type="submit" onclick="checkSubmitStatus()"
                             style="width: 200px;border-radius:8px;background:#9c1d5e;">Apply</button><br>
 
+                    </div>
+                    <div id="result">
+                        <p id="overall"></p>
+                        <p id="energyFee"></p>
+                        <p id="timeFee"></p>
+                        <p id="transactionFee"></p>
+                    </div>
                 </div>
-                </form>
                 <br>
             </div>
         </div>
@@ -117,37 +111,50 @@
 
     <script>
         function checkSubmitStatus() {
-            var data = JSON.stringify({
+            var data = {
                 "rate": {
-                    "energy": 0.3,
-                    "time": 2,
-                    "transaction": 1
+                    "energy": document.getElementById("energy").value,
+                    "time": document.getElementById("time").value,
+                    "transaction": document.getElementById("transaction").value
                 },
                 "cdr": {
-                    "meterStart": 1204307,
-                    "timestampStart": "2021-04-05T10:04:00Z",
-                    "meterStop": 1215230,
-                    "timestampStop": "2021-04-05T11:27:00Z"
+                    "meterStart": document.getElementById("meterStart").value,
+                    "timestampStart": document.getElementById("timestampStart").value,
+                    "meterStop": document.getElementById("meterStop").value,
+                    "timestampStop": document.getElementById("timestampStop").value
                 }
-            });
+            }
+            console.log(data)
+            fetch('/rate', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'cache-control': "no-cache",
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('energy').value = '';
+                    document.getElementById("time").value = '';
+                    document.getElementById("transaction").value = '';
+                    document.getElementById("meterStart").value = '';
+                    document.getElementById("timestampStart").value = '';
+                    document.getElementById("meterStop").value = '';
+                    document.getElementById("timestampStop").value = '';
+                    document.getElementById("overall").innerHTML = "Overall: " + data['overall'];
+                    document.getElementById("energyFee").innerHTML = "energy: " + data['components']['energy'];
+                    document.getElementById("timeFee").innerHTML = "time: " + data['components']['time'];
+                    document.getElementById("transactionFee").innerHTML = "transaction: " + data['components']['transaction'];
+                    console.log('Success:', data);
 
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
-
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    console.log(this.responseText);
-                }
-            });
-
-            xhr.open("POST", "http://127.0.0.1:5000/rate");
-            xhr.setRequestHeader("content-type", "application/json");
-            xhr.setRequestHeader("cache-control", "no-cache");
-
-            xhr.send(data);
-            console.log(xhr.responseText)
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
     </script>
+
 
 
 
