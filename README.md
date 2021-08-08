@@ -75,9 +75,7 @@ you can see the result at the end of the page
 
 
 ## Author
-Shamim Sanisales 
 [Shamim Sanisales](https://shsanisales.ir)
 
 ## Acknowledgments
 * This code is written for HTB's code challenge by Shamim
- 
